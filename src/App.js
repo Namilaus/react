@@ -1,30 +1,50 @@
-import logo from './logo.svg';
-import React,{ useState,useEffect } from 'react';
 import './App.css';
+import {useState} from 'react';
 
-
+//TODO undo sadece son itemi geri getiriyoru bunun nedenini anla ve sorunu coz
 
 function App() {
-  let [count , setCount] = useState(0);
- 
+
+  const [points,setPoints] = useState([])
+
+const handleClick = (e) => {
+  console.log(e.clientX,e.clientY)
+  setPoints([...points,{
+    x:e.clientX,
+    y:e.clientY
+  }])
+  console.log(points)
+}
+
+const [rPoints, setRpoints] = useState([])
+
+const redo = (e) => {
+  e.stopPropagation()
+  const data = [...points]
+  const redoItem = data.pop()
+  setRpoints([...data,redoItem])
+  setPoints(data)
+
+}
+
+const undo = (e) => {
+  e.stopPropagation()
+  setPoints([...rPoints])
+}
+
  return (
-
-  <div className="App">
-<header>
-  <div class="logo">
-  </div>
-
-  <div class="My basket">
-    My Basket
-  </div>
-  <div class="login">
-     Login 
-</div>
-  <div class="register">
-    Register
-    bro wtf
-  </div>
-</header>
+  <div className="App" onClick={handleClick}>
+    {points.map((point)=>(
+      <div className="point" style={{left:point.x,top:point.y}}></div>
+    ))}
+    <header className="header">
+      <button onClick={redo} disabled={points.length==0}>
+        Redo
+      </button>
+      <button onClick={undo} disabled={rPoints.length==0}>
+        Undo
+      </button>
+    </header>
     </div>
   );
 }

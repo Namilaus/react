@@ -1,17 +1,30 @@
-header{
-    display: flex;
+html,body,#root,.App{
+    height:100%;
     width:100%;
-    border:2px solid black;
-    border-radius:30%;
-    overflow:hidden;
-}
-.login{
-    margin-left:60%;
+    background-color: gray;
 }
 
-.register{
-    margin-left:20%;
-    color:blue;
+.point{
+    position:absolute;
+    height:1%;
+    width:1%;
+    border-radius:50%;
+    background-color: red;
+    transform: translate(-50%,-50%);
+}
+button{
+    background-color: white;
+    border-color:white;
+    border-radius:7px;
+}
+header{
+    position: absolute;
+    margin-left:2%;
+    display:flex;
+    gap:30%;
 }
 
-/* brp wtf ssnnnnn*/
+button[disabled]{
+    color:black;
+    opacity:0.5;
+}
